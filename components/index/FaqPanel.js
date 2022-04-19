@@ -50,7 +50,9 @@ export default function FaqPanel() {
             )}
           </Disclosure.Button>
 
-          <hr className="border-gray-200" />
+          <hr
+            className={`${open ? "border-gray-200" : "hidden border-gray-200"}`}
+          />
 
           <Disclosure.Panel as="p" className="p-8 text-sm text-gray-500">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas
