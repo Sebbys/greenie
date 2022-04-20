@@ -2,8 +2,26 @@ import Link from "next/link";
 import FaqPanel from "../components/index/FaqPanel";
 import Feature from "../components/index/Feature";
 import TeamMember from "../components/index/TeamMember";
+import useSWR from "swr";
+import axios from "axios";
 
-export default function Home() {
+const Home = () => {
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
+
+  const { data: faqs, error: faqsError } = useSWR(
+    "http://localhost:1337/api/faqs",
+    fetcher
+  );
+
+  const { data: teamMembers, error: teamMembersError } = useSWR(
+    "http://localhost:1337/api/team-members?populate=image",
+    fetcher
+  );
+
+  if (faqsError || teamMembersError) return <div>Request Failed</div>;
+
+  if (!faqs || !teamMembers) return <div>Loading...</div>;
+
   return (
     <div className="grid">
       <header className="bg-white">
@@ -126,7 +144,13 @@ export default function Home() {
           </h1>
 
           <div className="mt-12 space-y-8">
-            <FaqPanel />
+            {faqs.data.map((faq) => (
+              <FaqPanel
+                key={faq.id}
+                question={faq.attributes.question}
+                answer={faq.attributes.answer}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -147,8 +171,18 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-0 xl:mx-4 xl:w-1/2 md:grid-cols-2">
-              <TeamMember />
-              <TeamMember />
+              {teamMembers.data.map((member) => (
+                <TeamMember
+                  key={member.id}
+                  name={member.attributes.name}
+                  job={member.attributes.job}
+                  image={
+                    member.attributes.image.data
+                      ? member.attributes.image.data.attributes.url
+                      : ""
+                  }
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -212,4 +246,6 @@ export default function Home() {
       </footer>
     </div>
   );
-}
+};
+
+export default Home;

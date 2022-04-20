@@ -1,7 +1,6 @@
 import { Disclosure } from "@headlessui/react";
-import React, { useState } from "react";
 
-export default function FaqPanel() {
+const FaqPanel = (props) => {
   return (
     <Disclosure as="div" className="border-2 border-gray-100 rounded-lg">
       {({ open }) => (
@@ -10,9 +9,7 @@ export default function FaqPanel() {
             onClick={() => console.log(isOpen)}
             className="flex items-center justify-between w-full p-8"
           >
-            <h1 className="font-semibold text-gray-700">
-              How i can play for my appoinment ?
-            </h1>
+            <h1 className="font-semibold text-gray-700">{props.question}</h1>
             {open ? (
               <span className="text-gray-400 bg-gray-200 rounded-full">
                 <svg
@@ -55,13 +52,12 @@ export default function FaqPanel() {
           />
 
           <Disclosure.Panel as="p" className="p-8 text-sm text-gray-500">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas
-            eaque nobis, fugit odit omnis fugiat deleniti animi ab maxime cum
-            laboriosam recusandae facere dolorum veniam quia pariatur obcaecati
-            illo ducimus?
+            {props.answer}
           </Disclosure.Panel>
         </>
       )}
     </Disclosure>
   );
-}
+};
+
+export default FaqPanel;
