@@ -1,4 +1,5 @@
 import { Disclosure } from "@headlessui/react";
+import { Icon } from "@iconify/react";
 
 const FaqPanel = (props) => {
   return (
@@ -11,38 +12,22 @@ const FaqPanel = (props) => {
           >
             <h1 className="font-semibold text-gray-700">{props.question}</h1>
             {open ? (
-              <span className="text-gray-400 bg-gray-200 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M18 12H6"
-                  />
-                </svg>
+              <span className="bg-white-200 rounded-full">
+                <Icon
+                  icon="akar-icons:circle-minus-fill"
+                  color="#A1A1AA"
+                  width="24"
+                  height="24"
+                />
               </span>
             ) : (
-              <span className="text-white bg-green-500 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                  />
-                </svg>
+              <span className="bg-white rounded-full">
+                <Icon
+                  icon="akar-icons:circle-plus-fill"
+                  color="#22c55e"
+                  width="24"
+                  height="24"
+                />
               </span>
             )}
           </Disclosure.Button>

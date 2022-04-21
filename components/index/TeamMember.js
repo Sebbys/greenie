@@ -6,7 +6,7 @@ const TeamMember = (props) => {
         src={
           props.image
             ? `http://localhost:1337${props.image}`
-            : "team-member-placeholder.png"
+            : "team-member-placeholder.svg"
         }
         alt=""
       />

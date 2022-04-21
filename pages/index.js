@@ -8,8 +8,18 @@ import axios from "axios";
 const Home = () => {
   const fetcher = (url) => axios.get(url).then((res) => res.data);
 
+  const { data: landing, error: landingError } = useSWR(
+    "http://localhost:1337/api/landing-page",
+    fetcher
+  );
+
   const { data: faqs, error: faqsError } = useSWR(
     "http://localhost:1337/api/faqs",
+    fetcher
+  );
+
+  const { data: features, error: featuresError } = useSWR(
+    "http://localhost:1337/api/features",
     fetcher
   );
 
@@ -18,9 +28,11 @@ const Home = () => {
     fetcher
   );
 
-  if (faqsError || teamMembersError) return <div>Request Failed</div>;
+  if (faqsError || teamMembersError || featuresError || landingError)
+    return <div>Request Failed</div>;
 
-  if (!faqs || !teamMembers) return <div>Loading...</div>;
+  if (!faqs || !teamMembers || !features || !landing)
+    return <div>Loading...</div>;
 
   return (
     <div className="grid">
@@ -88,12 +100,10 @@ const Home = () => {
             <div className="w-full lg:w-1/2">
               <div className="lg:max-w-lg">
                 <h1 className="text-3xl font-semibold text-gray-800 uppercase lg:text-3xl">
-                  Best Place To Choose Your Clothes
+                  {landing.data.attributes.hero_title}
                 </h1>
                 <p className="mt-2 text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Porro beatae error laborum ab amet sunt recusandae? Reiciendis
-                  natus perspiciatis optio.
+                  {landing.data.attributes.hero_description}
                 </p>
               </div>
             </div>
@@ -102,7 +112,7 @@ const Home = () => {
               <img
                 className="w-full h-full lg:max-w-2xl"
                 src="/hero.svg"
-                alt="hero.svg"
+                alt="Hero Image"
               />
             </div>
           </div>
@@ -111,8 +121,8 @@ const Home = () => {
 
       <section id="features" className="bg-gray-100">
         <div className="container px-6 py-10 mx-auto">
-          <h1 className="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl">
-            explore our <br /> awesome Features
+          <h1 className="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl max-w-xs">
+            {landing.data.attributes.feature_title}
           </h1>
 
           <div className="mt-2">
@@ -123,14 +133,21 @@ const Home = () => {
 
           <div className="mt-8 xl:mt-12 lg:flex lg:items-center">
             <div className="w-full lg:w-1/2 grid grid-cols-1 gap-8 xl:gap-16 md:grid-cols-2">
-              <Feature />
+              {features.data.map((feature) => (
+                <Feature
+                  key={feature.id}
+                  name={feature.attributes.name}
+                  description={feature.attributes.description}
+                  icon={feature.attributes.icon}
+                />
+              ))}
             </div>
 
             <div className="hidden lg:flex lg:w-1/2 lg:justify-center">
               <img
                 className="w-[28rem] h-[28rem] flex-shrink-0 object-cover xl:w-[34rem] xl:h-[34rem] rounded-full"
-                src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                alt=""
+                src="features.svg"
+                alt="Feature Image"
               />
             </div>
           </div>
@@ -140,7 +157,7 @@ const Home = () => {
       <section id="faq" className="bg-white">
         <div className="container max-w-4xl px-6 py-10 mx-auto">
           <h1 className="text-4xl font-semibold text-center text-gray-800">
-            Frequently asked questions
+            {landing.data.attributes.faq_title}
           </h1>
 
           <div className="mt-12 space-y-8">
@@ -160,13 +177,11 @@ const Home = () => {
           <div className="xl:flex xl:items-center xL:-mx-4">
             <div className="xl:w-1/2 xl:mx-4">
               <h1 className="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl">
-                Meet Our Team
+                {landing.data.attributes.team_title}
               </h1>
 
               <p className="max-w-2xl mt-4 text-gray-500">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
-                incidunt ex placeat modi magni quia error alias, adipisci rem
-                similique, at omnis eligendi optio eos harum.
+                {landing.data.attributes.team_description}
               </p>
             </div>
 

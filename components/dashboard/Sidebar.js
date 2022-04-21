@@ -1,5 +1,4 @@
-import { Syringe } from "@styled-icons/fluentui-system-regular";
-import { Dashboard } from "@styled-icons/material-outlined";
+import { Icon } from "@iconify/react";
 import Link from "next/link";
 
 export default function Sidebar() {
@@ -41,7 +40,7 @@ export default function Sidebar() {
             className="flex items-center px-4 py-2 mt-5 text-white bg-green-500 transition-colors duration-200 transform rounded-md hover:bg-green-500 hover:text-white"
             href="#"
           >
-            <Dashboard size="24" />
+            <Icon icon="ic:outline-dashboard" width="24" height="24" />
 
             <span className="mx-4 font-medium">Dashboard</span>
           </a>
@@ -50,7 +49,7 @@ export default function Sidebar() {
             className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-green-500 hover:text-white"
             href="#"
           >
-            <Syringe size="24" />
+            <Icon icon="fluent:syringe-20-regular" width="24" height="24" />
 
             <span className="mx-4 font-medium">Diagnose</span>
           </a>
