@@ -2,38 +2,8 @@ import Link from "next/link";
 import FaqPanel from "../components/index/FaqPanel";
 import Feature from "../components/index/Feature";
 import TeamMember from "../components/index/TeamMember";
-import useSWR from "swr";
-import axios from "axios";
 
-const Home = () => {
-  const fetcher = (url) => axios.get(url).then((res) => res.data);
-
-  const { data: landing, error: landingError } = useSWR(
-    "http://localhost:1337/api/landing-page",
-    fetcher
-  );
-
-  const { data: faqs, error: faqsError } = useSWR(
-    "http://localhost:1337/api/faqs",
-    fetcher
-  );
-
-  const { data: features, error: featuresError } = useSWR(
-    "http://localhost:1337/api/features",
-    fetcher
-  );
-
-  const { data: teamMembers, error: teamMembersError } = useSWR(
-    "http://localhost:1337/api/team-members?populate=image",
-    fetcher
-  );
-
-  if (faqsError || teamMembersError || featuresError || landingError)
-    return <div>Request Failed</div>;
-
-  if (!faqs || !teamMembers || !features || !landing)
-    return <div>Loading...</div>;
-
+const Home = ({ landing, faqs, features, teamMembers }) => {
   return (
     <div className="grid">
       <header className="bg-white">
@@ -42,7 +12,7 @@ const Home = () => {
             <div>
               <Link href="/">
                 <a className="text-2xl font-bold text-gray-800 lg:text-3xl hover:text-gray-700">
-                  Greenie
+                  {process.env.APP_TITLE}
                 </a>
               </Link>
             </div>
@@ -206,7 +176,7 @@ const Home = () => {
       <footer className="flex flex-col items-center justify-between px-6 py-4 bg-white sm:flex-row">
         <Link href="/">
           <a className="text-xl font-bold text-gray-800 hover:text-gray-700">
-            Greenie
+            {process.env.APP_TITLE}
           </a>
         </Link>
 
@@ -261,6 +231,22 @@ const Home = () => {
       </footer>
     </div>
   );
+};
+
+export const getServerSideProps = async () => {
+  const [landingRes, faqsRes, featuresRes, teamMembersRes] = await Promise.all([
+    fetch(`${process.env.URL_API}api/landing-page`),
+    fetch(`${process.env.URL_API}api/faqs`),
+    fetch(`${process.env.URL_API}api/features`),
+    fetch(`${process.env.URL_API}api/team-members?populate=image`),
+  ]);
+  const [landing, faqs, features, teamMembers] = await Promise.all([
+    landingRes.json(),
+    faqsRes.json(),
+    featuresRes.json(),
+    teamMembersRes.json(),
+  ]);
+  return { props: { landing, faqs, features, teamMembers } };
 };
 
 export default Home;
