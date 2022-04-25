@@ -163,7 +163,7 @@ const Home = ({ landing, faqs, features, teamMembers }) => {
                   job={member.attributes.job}
                   image={
                     member.attributes.image.data
-                      ? member.attributes.image.data.attributes.url
+                      ? member.attributes.image.data.attributes.url.slice(1)
                       : ""
                   }
                 />

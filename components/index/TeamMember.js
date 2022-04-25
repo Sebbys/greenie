@@ -5,7 +5,7 @@ const TeamMember = (props) => {
         className="object-cover rounded-xl aspect-square h-64"
         src={
           props.image
-            ? `http://localhost:1337${props.image}`
+            ? `${process.env.URL_API}${props.image}`
             : "team-member-placeholder.svg"
         }
         alt=""
