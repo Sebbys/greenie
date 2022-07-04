@@ -1,5 +1,5 @@
-import { Icon } from "@iconify/react";
 import { Menu } from "@headlessui/react";
+import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -13,6 +13,11 @@ const navigation = [
     name: "Diagnose",
     href: "/diagnose",
     icon: "fluent:syringe-20-regular",
+  },
+  {
+    name: "Plants",
+    href: "/plants",
+    icon: "charm:plant-pot",
   },
 ];
 
@@ -46,7 +51,7 @@ export default function Sidebar() {
                 <Link href={item.href}>
                   <a
                     className={
-                      router.pathname === item.href
+                      router.pathname.match(item.href)
                         ? "flex items-center px-4 py-2 mt-5 text-white bg-green-500 transition-colors duration-200 transform rounded-md hover:bg-green-500 hover:text-white"
                         : "flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-green-500 hover:text-white"
                     }

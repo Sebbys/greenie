@@ -1,8 +1,8 @@
 import { useState } from "react";
 import useSWR, { SWRConfig } from "swr";
-import PlantCard from "../components/dashboard/PlantCard";
-import Sort from "../components/dashboard/Sort";
-import Sidebar from "../components/Sidebar";
+import PlantCard from "../../components/dashboard/PlantCard";
+import Sort from "../../components/dashboard/Sort";
+import Sidebar from "../../components/Sidebar";
 
 const url = `${process.env.URL_API}api/plants?${new URLSearchParams({
   populate: "image",
@@ -57,6 +57,7 @@ const Dashboard = () => {
               ? data.data.map((plant) => (
                   <PlantCard
                     key={plant.id}
+                    id={plant.id}
                     name={plant.attributes.name}
                     latin_name={plant.attributes.latin_name}
                     image={
