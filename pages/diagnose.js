@@ -6,6 +6,7 @@ import useSWR from "swr";
 import qs from "qs";
 import Fuse from "fuse.js";
 import Link from "next/link";
+import Layout from "../components/layouts/dashboard";
 
 export const getServerSideProps = async () => {
   const plantsUrl = `${process.env.URL_API}api/plants?${new URLSearchParams({
@@ -113,8 +114,7 @@ const Diagnose = ({ plants }) => {
 
   return (
     <>
-      <div className="flex">
-        <Sidebar />
+      <Layout title="Diagnose">
         <section className="container p-6 mx-auto bg-white">
           <h2 className="text-xl font-medium text-gray-800 capitalize md:text-2xl">
             Diagnose Plant
@@ -243,7 +243,7 @@ const Diagnose = ({ plants }) => {
             </div>
           </form>
         </section>
-      </div>
+      </Layout>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>

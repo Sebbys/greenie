@@ -1,5 +1,6 @@
 import { Tab } from "@headlessui/react";
 import { marked } from "marked";
+import Layout from "../../components/layouts/dashboard";
 import Sidebar from "../../components/Sidebar";
 
 function classNames(...classes) {
@@ -28,8 +29,7 @@ const DiseaseDetails = ({ disease }) => {
   const symptoms = disease.data.attributes.symptoms.data;
 
   return (
-    <div className="flex">
-      <Sidebar />
+    <Layout title={disease.data.attributes.name}>
       <section className="container p-6 mx-auto bg-white">
         <h2 className="text-xl font-medium text-gray-800 capitalize md:text-2xl col-span-full">
           Disease Details
@@ -128,7 +128,7 @@ const DiseaseDetails = ({ disease }) => {
           </div>
         </div>
       </section>
-    </div>
+    </Layout>
   );
 };
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import useSWR, { SWRConfig } from "swr";
-import PlantCard from "../../components/dashboard/PlantCard";
-import Sort from "../../components/dashboard/Sort";
-import Sidebar from "../../components/Sidebar";
+import Layout from "../../components/layouts/dashboard";
+import PlantCard from "../../components/plants/PlantCard";
+import Sort from "../../components/plants/Sort";
 
 const url = `${process.env.URL_API}api/plants?${new URLSearchParams({
   populate: "image",
@@ -24,7 +24,7 @@ export const getServerSideProps = async () => {
   };
 };
 
-const Dashboard = () => {
+const Plants = () => {
   const { data } = useSWR(url, fetcher);
 
   const sort = [
@@ -34,8 +34,7 @@ const Dashboard = () => {
   const [selectedSort, setSelectedSort] = useState(sort[0]);
 
   return (
-    <div className="flex">
-      <Sidebar />
+    <Layout title="Plant List">
       <section className="container p-6 mx-auto bg-white">
         <div className="grid grid-cols-2">
           <h2 className="text-xl font-medium text-gray-800 capitalize md:text-2xl">
@@ -85,7 +84,7 @@ const Dashboard = () => {
           </div>
         </div>
       </section>
-    </div>
+    </Layout>
   );
 };
 
@@ -93,7 +92,7 @@ const Page = ({ fallback }) => {
   // SWR hooks inside the `SWRConfig` boundary will use those values.
   return (
     <SWRConfig value={{ fallback }}>
-      <Dashboard />
+      <Plants />
     </SWRConfig>
   );
 };

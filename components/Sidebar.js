@@ -10,14 +10,14 @@ const navigation = [
     icon: "ic:outline-dashboard",
   },
   {
-    name: "Diagnose",
-    href: "/diagnose",
-    icon: "fluent:syringe-20-regular",
-  },
-  {
     name: "Plants",
     href: "/plants",
     icon: "charm:plant-pot",
+  },
+  {
+    name: "Diagnose",
+    href: "/diagnose",
+    icon: "fluent:syringe-20-regular",
   },
 ];
 

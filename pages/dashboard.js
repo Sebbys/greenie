@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useSWR, { SWRConfig } from "swr";
-import PlantCard from "../components/dashboard/PlantCard";
-import Sort from "../components/dashboard/Sort";
+import PlantCard from "../components/plants/PlantCard";
+import Sort from "../components/plants/Sort";
 import Sidebar from "../components/Sidebar";
 
 const url = `${process.env.URL_API}api/plants?${new URLSearchParams({

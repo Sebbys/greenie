@@ -1,10 +1,10 @@
 import Head from "next/head";
 
-const Main = ({ children }) => {
+const Main = ({ children, title }) => {
   return (
     <>
       <Head>
-        <title>Fahri - Homepage</title>
+        <title>Greenie</title>
       </Head>
       <main>{children}</main>
     </>
