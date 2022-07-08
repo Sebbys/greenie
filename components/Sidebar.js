@@ -5,11 +5,6 @@ import { useRouter } from "next/router";
 
 const navigation = [
   {
-    name: "Dashboard",
-    href: "/dashboard",
-    icon: "ic:outline-dashboard",
-  },
-  {
     name: "Plants",
     href: "/plants",
     icon: "charm:plant-pot",

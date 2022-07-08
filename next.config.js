@@ -5,7 +5,7 @@ const nextConfig = {
 
 const env = {
   APP_TITLE: "Greenie",
-  URL_API: "http://localhost:1337/",
+  URL_API: "https://greenie-api.herokuapp.com/",
 };
 
 module.exports = { nextConfig, env };

@@ -58,7 +58,7 @@ const Home = ({ landing, faqs, features, teamMembers }) => {
             </Link>
           </div>
 
-          <Link href="/dashboard">
+          <Link href="/plants">
             <a className="block px-5 py-2 mt-4 font-medium leading-5 text-center text-white capitalize bg-green-600 rounded-lg lg:mt-0 hover:bg-green-500 lg:w-auto">
               Get started
             </a>
