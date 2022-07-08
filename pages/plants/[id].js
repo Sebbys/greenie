@@ -85,7 +85,10 @@ const PlantDetails = ({ plant }) => {
                 <Tab.Panel className="rounded-xl p-3 bg-green-900/20">
                   <ul>
                     {diseases.map((disease) => (
-                      <li className="relative p-3 bg-white odd:bg-gray-100 first:rounded-t-md last:rounded-b-md">
+                      <li
+                        className="relative p-3 bg-white odd:bg-gray-100 first:rounded-t-md last:rounded-b-md"
+                        key={disease.id}
+                      >
                         <h3 className="text-sm font-medium leading-5">
                           {disease.attributes.name}
                         </h3>
