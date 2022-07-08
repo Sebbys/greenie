@@ -1,7 +1,6 @@
 import { Tab } from "@headlessui/react";
 import { marked } from "marked";
 import Layout from "../../components/layouts/dashboard";
-import Sidebar from "../../components/Sidebar";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

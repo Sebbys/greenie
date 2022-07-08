@@ -1,11 +1,10 @@
-import Sidebar from "../components/Sidebar";
-import { Combobox, Transition, Dialog } from "@headlessui/react";
-import { React, useState, Fragment } from "react";
+import { Combobox, Dialog, Transition } from "@headlessui/react";
 import { Icon } from "@iconify/react";
-import useSWR from "swr";
-import qs from "qs";
 import Fuse from "fuse.js";
 import Link from "next/link";
+import qs from "qs";
+import { Fragment, useState } from "react";
+import useSWR from "swr";
 import Layout from "../components/layouts/dashboard";
 
 export const getServerSideProps = async () => {
